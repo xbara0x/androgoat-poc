@@ -5,6 +5,17 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <!--
+        Package visibility (Android 11+ / targetSdk 30+): an app cannot resolve another
+        package's services or broadcast receivers unless it declares interest here. Without
+        this, startService()/sendBroadcast() to owasp.sat.agoat fail silently ("not found"),
+        even though the components are exported. Activities are exempt, which is why the two
+        access-control launches worked without it.
+    -->
+    <queries>
+        <package android:name="owasp.sat.agoat" />
+    </queries>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"

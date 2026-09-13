@@ -8,14 +8,13 @@
     <string name="action_settings">Settings</string>
 
     <!-- Unprotected Android Components -->
-    <string name="uac_launch_activity">Login without PIN verification by launching Activity</string>
-    <string name="uac_custom_url">Login using Custom URL Scheme (Without PIN verification)</string>
-    <string name="uac_download_invoice">Download Invoice without PIN verification (Not implemented yet)</string>
-    <string name="uac_broadcast">Get credentials by calling exported broadcast receiver</string>
-
+    <string name="uac_launch_activity">Open access-controlled screen directly (exported Activity)</string>
+    <string name="uac_custom_url">Open the same screen via deep link (androgoat://vulnapp)</string>
+    <string name="uac_download_invoice">Start exported DownloadInvoiceService (triggers invoice download)</string>
+    <string name="uac_broadcast">Trigger exported receiver (creds shown in a Toast, not captured)</string>
 
     <!-- Insecure Data Storage -->
-    <string name="ids_get_sdcard_files">Search and Read for temp files on SD Card containing credentials</string>
+    <string name="ids_get_sdcard_files">Try to read AndroGoat\'s insecurely stored credentials file</string>
 
     <string name="menu_uac">Unprotected Components</string>
     <string name="menu_ids">Insecure Data Storage</string>
