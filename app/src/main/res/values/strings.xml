@@ -3,24 +3,28 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">AndroGoat PoC by Vinicius Elias</string>
-    <string name="nav_header_subtitle">github.com/aka-barao</string>
+    <string name="nav_header_subtitle">github.com/xbara0x</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
     <!-- Unprotected Android Components -->
-    <string name="uac_launch_activity">Open access-controlled screen directly (exported Activity)</string>
-    <string name="uac_custom_url">Open the same screen via deep link (androgoat://vulnapp)</string>
-    <string name="uac_download_invoice">Start exported DownloadInvoiceService (triggers invoice download)</string>
-    <string name="uac_broadcast">Trigger exported receiver (creds shown in a Toast, not captured)</string>
+    <string name="uac_desc">AndroGoat exports four components to other apps. Each button below reaches one of them from this app\'s process.</string>
+    <string name="uac_launch_activity">Open gated screen (exported Activity)</string>
+    <string name="uac_custom_url">Open it via deep link (androgoat://vulnapp)</string>
+    <string name="uac_download_invoice">Start exported invoice service</string>
+    <string name="uac_broadcast">Trigger exported receiver (creds shown on AndroGoat\'s UI)</string>
 
     <!-- Insecure Data Storage -->
-    <string name="ids_get_sdcard_files">Try to read AndroGoat\'s insecurely stored credentials file</string>
+    <string name="ids_desc">AndroGoat writes a temp file with credentials into its app-scoped external storage. Try to read it from here.</string>
+    <string name="ids_get_sdcard_files">Scan for AndroGoat\'s credentials file</string>
 
     <!-- Exported ContentProvider -->
-    <string name="provider_read">Read exported ContentProvider (dump user pins)</string>
+    <string name="provider_desc">AndroGoat exports a ContentProvider (userpinsprovider) with no read or write permission. Read it — or tamper with it.</string>
+    <string name="provider_read">Read user pins</string>
+    <string name="provider_update">Overwrite all PINs with \'pwned\'</string>
+    <string name="provider_delete">Delete all rows</string>
 
     <string name="menu_uac">Unprotected Components</string>
     <string name="menu_ids">Insecure Data Storage</string>
     <string name="menu_provider">Exported ContentProvider</string>
-
 </resources>

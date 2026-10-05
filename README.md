@@ -41,7 +41,7 @@ against AndroGoat v2.0.1; exploit 6 is the one that modern Android deliberately 
 | 2 | Unprotected Components | same activity | Deep link `androgoat://vulnapp` | Same destination reached through the registered URL scheme. |
 | 3 | Unprotected Components | `DownloadInvoiceService` (service) | `startService`, falling back to `ContextCompat.startForegroundService` | On O+ the background-start limit refuses the plain `startService`, so the fallback starts it as a *foreground* service the victim never opted into. The victim enqueues the download (which succeeds) and is then killed with `ForegroundServiceDidNotStartInTimeException` because it never calls `startForeground()`. |
 | 4 | Unprotected Components | `ShowDataReceiver` (receiver) | `sendBroadcast` (explicit) | The receiver runs, but it only shows credentials in a **Toast on AndroGoat's own UI** — nothing is returned to this app. Demonstrates callability, not exfiltration. |
-| 5 | Exported ContentProvider | `ContentProviderActivity` provider, authority `owasp.sat.agoat.provider.userpinsprovider` | `ContentResolver.query` | Queries the world-readable `user_pins` table and dumps **usernames + PINs into this app** (observed: `Admin/Admin`, `AndroGoat/AndroGoat`, `root/toor`). Real cross-app credential exfiltration. |
+| 5 | Exported ContentProvider | `ContentProviderActivity` provider, authority `owasp.sat.agoat.provider.userpinsprovider` | `ContentResolver.query` / `update` / `delete` | The provider is exported with **no read or write permission**. The app reads the `user_pins` table (`Admin/Admin`, `AndroGoat/AndroGoat`, `root/toor`), then **overwrites every PIN and deletes every row** — cross-app confidentiality *and* integrity impact. |
 | 6 | Insecure Data Storage | `InsecureStorageSDCardActivity` temp file | Directory scan + read | Tries to read the `users*_tmp` file AndroGoat writes to its *app-scoped* external dir. Blocked by scoped storage on Android 11+; the screen explains why instead of failing silently. |
 
 ### Android version notes
@@ -51,9 +51,9 @@ against AndroGoat v2.0.1; exploit 6 is the one that modern Android deliberately 
   service cross-app on O+ is `startForegroundService`, and a service that never calls
   `startForeground()` is killed ~5s later. The download survives because it is enqueued
   in `onStartCommand` first.
-- Exploit **5** (ContentProvider) is the most impactful: it requires no user interaction
-  on the victim and returns data. It works because the provider is exported with no
-  `readPermission`.
+- Exploit **5** (ContentProvider) is the most impactful: no user interaction on the
+  victim, and it both reads and modifies data. It works because the provider is exported
+  with no `readPermission`/`writePermission`.
 - Exploit **6** can only succeed on **Android 10 or older** (scoped storage forbids
   cross-app reads of `Android/data/<pkg>/` from Android 11 on, even with
   `MANAGE_EXTERNAL_STORAGE`). On Android 11+ the screen reports the reason.
