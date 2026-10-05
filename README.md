@@ -64,9 +64,10 @@ against AndroGoat v2.0.1; exploit 6 is the one that modern Android deliberately 
 
 ## Build
 
+Built with **AGP 9.4.1 / Gradle 9.6.0** (Kotlin comes from AGP's built-in support, so no
+separate `kotlin-android` plugin). It runs on a modern JDK — tested on JDK 25 and 27.
+
 ```bash
-# JDK 21 is required: AGP 8.5-alpha04 / Gradle 8.6 do not support newer JDKs.
-export JAVA_HOME=/path/to/jdk-21
 ./gradlew :app:assembleDebug
 ```
 
