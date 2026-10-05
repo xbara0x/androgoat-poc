@@ -1,4 +1,4 @@
-package com.example.androgoatpoc
+package dev.xbara0x.androgoatpoc
 
 import android.os.Bundle
 import android.view.Menu
@@ -10,7 +10,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
-import com.example.androgoatpoc.databinding.ActivityMainBinding
+import dev.xbara0x.androgoatpoc.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_uac, R.id.nav_ids
+                R.id.nav_uac, R.id.nav_ids, R.id.nav_provider
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

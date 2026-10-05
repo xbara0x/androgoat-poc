@@ -1,4 +1,4 @@
-package com.example.androgoatpoc.ui.uac
+package dev.xbara0x.androgoatpoc.ui.uac
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

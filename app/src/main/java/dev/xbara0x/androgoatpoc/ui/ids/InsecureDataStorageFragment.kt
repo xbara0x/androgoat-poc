@@ -1,4 +1,4 @@
-package com.example.androgoatpoc.ui.ids
+package dev.xbara0x.androgoatpoc.ui.ids
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -14,7 +14,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.androgoatpoc.databinding.FragmentIdsBinding
+import dev.xbara0x.androgoatpoc.databinding.FragmentIdsBinding
 import java.io.File
 
 private const val TARGET_PKG = "owasp.sat.agoat"
@@ -28,6 +28,9 @@ class InsecureDataStorageFragment : Fragment() {
     // Runtime permission request must be registered during fragment initialization.
     private val requestPermission =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+            // The view can already be gone if the user navigates away while the system
+            // permission dialog is up; dereferencing `binding` there would NPE.
+            if (_binding == null) return@registerForActivityResult
             if (granted) {
                 scanForCredentials()
             } else {

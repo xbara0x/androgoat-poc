@@ -16,7 +16,11 @@
     <!-- Insecure Data Storage -->
     <string name="ids_get_sdcard_files">Try to read AndroGoat\'s insecurely stored credentials file</string>
 
+    <!-- Exported ContentProvider -->
+    <string name="provider_read">Read exported ContentProvider (dump user pins)</string>
+
     <string name="menu_uac">Unprotected Components</string>
     <string name="menu_ids">Insecure Data Storage</string>
+    <string name="menu_provider">Exported ContentProvider</string>
 
 </resources>

@@ -1,13 +1,13 @@
-package com.example.androgoatpoc.ui.ids
+package dev.xbara0x.androgoatpoc.ui.provider
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class InsecureDataStorageViewModel : ViewModel() {
+class ProviderLeakViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "Insecure Data Storage – SD Card"
+        value = "Exported ContentProvider – AndroGoat user pins"
     }
     val text: LiveData<String> = _text
 }

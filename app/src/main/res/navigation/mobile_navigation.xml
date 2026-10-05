@@ -7,14 +7,20 @@
 
     <fragment
         android:id="@+id/nav_uac"
-        android:name="com.example.androgoatpoc.ui.uac.UnprotectedAndroidComponentsFragment"
+        android:name="dev.xbara0x.androgoatpoc.ui.uac.UnprotectedAndroidComponentsFragment"
         android:label="@string/menu_uac"
         tools:layout="@layout/fragment_uac" />
 
     <fragment
         android:id="@+id/nav_ids"
-        android:name="com.example.androgoatpoc.ui.ids.InsecureDataStorageFragment"
+        android:name="dev.xbara0x.androgoatpoc.ui.ids.InsecureDataStorageFragment"
         android:label="@string/menu_ids"
         tools:layout="@layout/fragment_ids" />
+
+    <fragment
+        android:id="@+id/nav_provider"
+        android:name="dev.xbara0x.androgoatpoc.ui.provider.ProviderLeakFragment"
+        android:label="@string/menu_provider"
+        tools:layout="@layout/fragment_provider" />
 
 </navigation>

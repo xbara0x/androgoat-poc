@@ -1,4 +1,4 @@
-package com.example.androgoatpoc
+package dev.xbara0x.androgoatpoc
 
 import org.junit.Test
 
