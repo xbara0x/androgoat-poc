@@ -4,6 +4,10 @@
   <img src="https://github.com/xbara0x/androgoat-poc/blob/master/androgoat-poc.gif" />
 </p>
 
+<p align="center">
+  <a href="https://github.com/xbara0x/androgoat-poc/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/xbara0x/androgoat-poc?sort=semver"></a>
+</p>
+
 **AndroGoat PoC** is a small Android app that plays the *attacker* against
 [AndroGoat](https://github.com/satishpatnayak/AndroGoat), an intentionally vulnerable
 Android app by [@satishpatnayak](https://github.com/satishpatnayak). Instead of
@@ -19,14 +23,21 @@ scoped storage — on modern Android.
 
 | | |
 |---|---|
-| App | AndroGoat `owasp.sat.agoat` |
-| Version | **v2.0.1** (`targetSdk 33`) |
-| Release | https://github.com/satishpatnayak/AndroGoat/releases/tag/v2.0.1 |
-| APK sha256 | `3e6f6b538b82874dd94c0d8cdadd69ba54d49b59d2c7eb055073892e8a4fc0e0` |
+| Victim app | AndroGoat `owasp.sat.agoat` |
+| Victim version | **v2.0.1** (`targetSdk 33`) |
+| Victim release | https://github.com/satishpatnayak/AndroGoat/releases/tag/v2.0.1 |
+| Victim APK sha256 | `3e6f6b538b82874dd94c0d8cdadd69ba54d49b59d2c7eb055073892e8a4fc0e0` |
+| This PoC | `dev.xbara0x.androgoatpoc` (**v2.1.0**) |
+
+## Download
+
+The prebuilt **debug APK** of this PoC is attached to the
+[latest release](https://github.com/xbara0x/androgoat-poc/releases/latest) — no need to
+build. The victim APK comes from AndroGoat's own release.
 
 ```bash
-adb install AndroGoat.apk        # the victim app
-adb install app-debug.apk        # this PoC (dev.xbara0x.androgoatpoc)
+adb install AndroGoat.apk                      # victim  (owasp.sat.agoat)
+adb install androgoat-poc-v2.1.0-debug.apk     # this PoC (dev.xbara0x.androgoatpoc)
 ```
 
 ## Exploits
